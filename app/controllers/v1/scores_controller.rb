@@ -1,8 +1,8 @@
 class V1::ScoresController < ApplicationController
-	def index
-		render json: { scores:
+  def index
+    render json: { scores:
 			[
-			  {
+        {
 					players: [
 						{
 							name: "Thorsten",
