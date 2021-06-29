@@ -1,8 +1,8 @@
 class V1::ScoresController < ApplicationController
 	def index
-		render json: { scores: 
+		render json: { scores:
 			[
-				{
+			  {
 					players: [
 						{
 							name: "Thorsten",
@@ -26,6 +26,7 @@ class V1::ScoresController < ApplicationController
 						}
 					]
 				}
-    ] }.to_json
-  end
+			] 
+		}.to_json
+	end
 end
