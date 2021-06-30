@@ -34,7 +34,7 @@ gem 'devise-jwt'
 
 # *** API specific ***
 # to allow for cross-origin requests:
-gem 'reack-cors'
+gem 'rack-cors'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
