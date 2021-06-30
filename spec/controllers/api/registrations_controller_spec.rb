@@ -1,4 +1,4 @@
-# to load whole stack amd return auth headers
+# to load whole stack and return auth headers
 
 require 'rails_helper'
 
@@ -45,5 +45,4 @@ describe RegistrationsController, type: :request do
       expect(response.status).to eq(400)
     end
   end
-
 end
