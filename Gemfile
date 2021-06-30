@@ -35,6 +35,8 @@ gem 'devise-jwt'
 # *** API specific ***
 # to allow for cross-origin requests:
 gem 'rack-cors'
+# to return models as valid JSON:API objects:
+gem 'jsonapi-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
