@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_06_121616) do
+ActiveRecord::Schema.define(version: 2021_07_06_134018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2021_07_06_121616) do
     t.decimal "result"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_api_matches_on_user_id"
   end
 
   create_table "api_player_scores", force: :cascade do |t|
@@ -35,6 +37,7 @@ ActiveRecord::Schema.define(version: 2021_07_06_121616) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "api_match_id", null: false
     t.boolean "owner"
+    t.boolean "first_turn"
     t.index ["api_match_id"], name: "index_api_player_scores_on_api_match_id"
   end
 
@@ -56,5 +59,6 @@ ActiveRecord::Schema.define(version: 2021_07_06_121616) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "api_matches", "users"
   add_foreign_key "api_player_scores", "api_matches"
 end
