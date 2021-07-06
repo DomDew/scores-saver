@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_06_091636) do
+ActiveRecord::Schema.define(version: 2021_07_06_094413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,20 +22,11 @@ ActiveRecord::Schema.define(version: 2021_07_06_091636) do
     t.decimal "result"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "api_player_score_id", null: false
+    t.index ["api_player_score_id"], name: "index_api_matches_on_api_player_score_id"
   end
 
   create_table "api_player_scores", force: :cascade do |t|
-    t.boolean "attacker"
-    t.string "name"
-    t.string "faction"
-    t.decimal "primaries_score"
-    t.decimal "secondaries_score"
-    t.decimal "total_vp"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "api_scores", force: :cascade do |t|
     t.boolean "attacker"
     t.string "name"
     t.string "faction"
@@ -52,28 +43,6 @@ ActiveRecord::Schema.define(version: 2021_07_06_091636) do
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
   end
 
-  create_table "players", force: :cascade do |t|
-    t.boolean "attacker"
-    t.string "name", null: false
-    t.string "faction"
-    t.decimal "primaries_score"
-    t.decimal "secondaries_score"
-    t.decimal "total_vp"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "scores", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "battle_size", null: false
-    t.string "mission"
-    t.decimal "result"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "player_id", null: false
-    t.index ["player_id"], name: "index_scores_on_player_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -86,5 +55,5 @@ ActiveRecord::Schema.define(version: 2021_07_06_091636) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "scores", "players"
+  add_foreign_key "api_matches", "api_player_scores"
 end
