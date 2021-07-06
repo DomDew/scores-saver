@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  attacker: false
+  name: MyString
+  faction: MyString
+  primaries_score: 
+  secondaries_score: 
+  total_vp: 
+
+two:
+  attacker: false
+  name: MyString
+  faction: MyString
+  primaries_score: 
+  secondaries_score: 
+  total_vp: 

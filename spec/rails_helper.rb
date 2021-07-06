@@ -66,4 +66,5 @@ RSpec.configure do |config|
   config.include UserHelpers
   config.include JSONAPI::RSpec
   config.include ApiHelpers
+  config.include ScoreHelpers
 end
