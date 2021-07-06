@@ -1,5 +1,5 @@
 class Api::Match < ApplicationRecord
-  has_many :api_player_scores
-  has_one :api_player_score, as: :user_score
-  has_one :api_player_score, as: :opponent_score
+  has_many :player_scores, foreign_key: 'api_match_id'
+
+  belongs_to :user
 end

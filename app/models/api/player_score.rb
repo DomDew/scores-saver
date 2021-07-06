@@ -1,3 +1,3 @@
 class Api::PlayerScore < ApplicationRecord
-  belongs_to :api_match
+  belongs_to :match, foreign_key: 'api_match_id'
 end
