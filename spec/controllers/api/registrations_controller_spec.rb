@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe RegistrationsController, type: :request do
-
   let (:user) { build_user }
   let (:existing_user) { create_user }
   let (:signup_url) { '/api/signup' }
