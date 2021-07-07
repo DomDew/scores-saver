@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class V1::ScoresControllerTest < ActionDispatch::IntegrationTest
+class Api::MatchesControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
