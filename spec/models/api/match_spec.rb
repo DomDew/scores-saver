@@ -10,7 +10,7 @@ RSpec.describe Api::Match, type: :model do
   end
 
   context 'When creating a new match' do
-    it 'Returns a valid match' do
+    it 'sets associations correctly' do
       created_match = create(:match, user: user)
 
       expect(created_match).to be_present
