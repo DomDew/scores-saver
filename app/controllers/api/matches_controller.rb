@@ -1,5 +1,5 @@
 class Api::MatchesController < Api::BaseController
-  before_action :find_match, only: %w[show]
+  before_action :find_match, only: %w[show update]
 
   def index
     @user = current_user
@@ -15,6 +15,12 @@ class Api::MatchesController < Api::BaseController
     @match = Api::Match.new(match_params)
     @match.user = current_user
     @match.save
+
+    render_jsonapi_response(@match)
+  end
+
+  def update
+    @match.update(match_params)
 
     render_jsonapi_response(@match)
   end

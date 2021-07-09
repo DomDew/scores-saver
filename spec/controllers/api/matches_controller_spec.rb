@@ -76,6 +76,30 @@ describe Api::MatchesController, type: :request do
     end
   end
 
+  context 'When updating a match' do
+    before do
+      match = create(:match, user: created_user)
+      login_with_api(created_user)
+      patch "/api/matches/#{match.id}", headers: {
+        'Authorization': response.headers['Authorization']
+      },
+      params: {
+        result: 'win'
+      }
+    end
+
+    it 'returns 200' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'returns the match' do
+      expect(json['data']).to be_present
+      expect(json['data']).to have_type('match')
+      expect(json['data']['id']).to be_present
+      expect(json['data']['attributes']['title']).to be_present
+    end
+  end
+
   context 'When a match is missing' do
     before do
       login_with_api(created_user)
