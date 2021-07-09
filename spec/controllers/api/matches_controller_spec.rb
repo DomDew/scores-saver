@@ -64,8 +64,7 @@ describe Api::MatchesController, type: :request do
 
   context 'When the Authorization header is missing' do
     before do
-      login_with_api(user)
-      create(:match, user: user)
+      match = create(:match, user: user)
       get "/api/matches/#{match.id}"
     end
 
