@@ -1,7 +1,19 @@
-class Api::MatchesController < ApplicationController
+class Api::MatchesController < Api::BaseController
+  before_action :find_match, only: %w[show]
+
   def index
     @user = current_user
     matches = Api::Match.where(user: @user)
     render jsonapi: matches
+  end
+
+  def show
+    render_jsonapi_response(@match)
+  end
+
+  private
+
+  def find_match
+    @match = Api::Match.find(params[:id])
   end
 end
