@@ -24,7 +24,7 @@ describe Api::UsersController, type: :request do
   context 'When a user is missing' do
     before do
       login_with_api(user)
-      get "/api/users/blank", headers: {
+      get '/api/users/blank', headers: {
         'Authorization': response.headers['Authorization']
       }
     end

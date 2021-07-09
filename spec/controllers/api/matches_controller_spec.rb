@@ -60,11 +60,19 @@ describe Api::MatchesController, type: :request do
         title: match.title,
         battle_size: match.battle_size,
         mission: match.mission,
+        result: 'win'
       }
     end
 
     it 'returns 200' do
       expect(response.status).to eq(200)
+    end
+
+    it 'returns the match' do
+      expect(json['data']).to be_present
+      expect(json['data']).to have_type('match')
+      expect(json['data']['id']).to be_present
+      expect(json['data']['attributes']['title']).to be_present
     end
   end
 

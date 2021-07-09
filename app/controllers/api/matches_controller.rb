@@ -26,6 +26,6 @@ class Api::MatchesController < Api::BaseController
   end
 
   def match_params
-    params.permit(:title, :battle_size, :mission)
+    params.permit(:title, :battle_size, :mission, :result)
   end
 end
