@@ -5,6 +5,5 @@ class RegistrationsController < Devise::RegistrationsController
     sign_up(resource_name, resource) if resource.persisted?
 
     render_jsonapi_response(resource)
-    # No token???
   end
 end

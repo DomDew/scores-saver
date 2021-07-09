@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :users, only: %w[show]
-    get 'matches', to: 'matches#index'
+    resources :matches
   end
 
   # manually set auth routes in path names to not conflict with devise's namespacing
