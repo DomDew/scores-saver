@@ -1,5 +1,5 @@
 class Api::MatchesController < Api::BaseController
-  before_action :find_match, only: %w[show update]
+  before_action :find_match, only: %w[show update destroy]
 
   def index
     @user = current_user
@@ -23,6 +23,10 @@ class Api::MatchesController < Api::BaseController
     @match.update(match_params)
 
     render_jsonapi_response(@match)
+  end
+
+  def destroy
+    render_jsonapi_response(@match.destroy)
   end
 
   private

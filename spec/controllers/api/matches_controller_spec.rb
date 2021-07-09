@@ -100,6 +100,25 @@ describe Api::MatchesController, type: :request do
     end
   end
 
+  context 'When deleting a match' do
+    before do
+      match1 = create(:match, user: created_user)
+      login_with_api(created_user)
+      delete "/api/matches/#{match1.id}", headers: {
+        'Authorization': response.headers['Authorization']
+      }
+    end
+
+    it 'returns 200' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'deletes the match' do
+      match2 = create(:match, title: 'Jerry vs Tom', user: created_user)
+      expect(Api::Match.all[0]).to eq(match2)
+    end
+  end
+
   context 'When a match is missing' do
     before do
       login_with_api(created_user)
