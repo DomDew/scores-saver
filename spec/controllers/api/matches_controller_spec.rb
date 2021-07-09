@@ -49,6 +49,25 @@ describe Api::MatchesController, type: :request do
     end
   end
 
+  context 'When creating a match' do
+    before do
+      match = build(:match)
+      login_with_api(created_user)
+      post '/api/matches', headers: {
+        'Authorization': response.headers['Authorization']
+      },
+      params: {
+        title: match.title,
+        battle_size: match.battle_size,
+        mission: match.mission,
+      }
+    end
+
+    it 'returns 200' do
+      expect(response.status).to eq(200)
+    end
+  end
+
   context 'When a match is missing' do
     before do
       login_with_api(created_user)
