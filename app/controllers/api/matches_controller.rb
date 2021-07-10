@@ -16,7 +16,6 @@ class Api::MatchesController < Api::BaseController
     @match.user = current_user
     @match.save
 
-    binding.pry
     render_jsonapi_response(@match)
   end
 
@@ -37,6 +36,7 @@ class Api::MatchesController < Api::BaseController
   end
 
   def match_params
-    params.require(:match).permit(:title, :battle_size, :mission, :result, player_scores_attributes: %i[attacker name faction primaries_score secondaries_score total_vp owner first_turn])
+    params.require(:match).permit(:title, :battle_size, :mission, :result,
+                                  player_scores_attributes: %i[attacker name faction primaries_score secondaries_score total_vp owner first_turn])
   end
 end

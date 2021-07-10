@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::PlayerScore, type: :model do
-  let (:user) { build_user }
+  let(:user) { build_user }
 
   it 'Returns a valid score' do
     score = build(:player_score)

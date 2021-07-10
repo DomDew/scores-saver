@@ -1,11 +1,11 @@
-# frozen_string_literal = true
+# frozen_string_literal: true
 
 require 'rails_helper'
 
 describe Api::MatchesController, type: :request do
-  let (:user) { build_user }
-  let (:created_user) { create_user }
-  let (:opponent_score) { build_opponent_score }
+  let(:user) { build_user }
+  let(:created_user) { create_user }
+  let(:opponent_score) { build_opponent_score }
 
   context 'When fetching a users matches' do
     before do
@@ -59,36 +59,36 @@ describe Api::MatchesController, type: :request do
       post '/api/matches', headers: {
         'Authorization': response.headers['Authorization']
       },
-      params: {
-        match: {
-          title: match.title,
-          battle_size: match.battle_size,
-          mission: match.mission,
-          result: 'win',
-          player_scores_attributes: [
-            {
-              name: owner_score.name,
-              owner: owner_score.owner,
-              attacker: owner_score.attacker,
-              first_turn: owner_score.first_turn,
-              faction: owner_score.faction,
-              primaries_score: owner_score.primaries_score,
-              secondaries_score: owner_score.secondaries_score,
-              total_vp: owner_score.total_vp
-            },
-            {
-              name: opponent_score.name,
-              owner: opponent_score.owner,
-              attacker: opponent_score.attacker,
-              first_turn: opponent_score.first_turn,
-              faction: opponent_score.faction,
-              primaries_score: opponent_score.primaries_score,
-              secondaries_score: opponent_score.secondaries_score,
-              total_vp: opponent_score.total_vp
-            }
-          ]
-        }
-      }
+                           params: {
+                             match: {
+                               title: match.title,
+                               battle_size: match.battle_size,
+                               mission: match.mission,
+                               result: 'win',
+                               player_scores_attributes: [
+                                 {
+                                   name: owner_score.name,
+                                   owner: owner_score.owner,
+                                   attacker: owner_score.attacker,
+                                   first_turn: owner_score.first_turn,
+                                   faction: owner_score.faction,
+                                   primaries_score: owner_score.primaries_score,
+                                   secondaries_score: owner_score.secondaries_score,
+                                   total_vp: owner_score.total_vp
+                                 },
+                                 {
+                                   name: opponent_score.name,
+                                   owner: opponent_score.owner,
+                                   attacker: opponent_score.attacker,
+                                   first_turn: opponent_score.first_turn,
+                                   faction: opponent_score.faction,
+                                   primaries_score: opponent_score.primaries_score,
+                                   secondaries_score: opponent_score.secondaries_score,
+                                   total_vp: opponent_score.total_vp
+                                 }
+                               ]
+                             }
+                           }
     end
 
     it 'returns 200' do
@@ -106,13 +106,17 @@ describe Api::MatchesController, type: :request do
   context 'When updating a match' do
     before do
       match = create(:match, user: created_user)
+      create(:player_score, match: match)
+
       login_with_api(created_user)
       patch "/api/matches/#{match.id}", headers: {
         'Authorization': response.headers['Authorization']
       },
-      params: {
-        result: 'win'
-      }
+                                        params: {
+                                          match: {
+                                            result: 'win'
+                                          }
+                                        }
     end
 
     it 'returns 200' do

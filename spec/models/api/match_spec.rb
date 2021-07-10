@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::Match, type: :model do
-  let (:user) { build_user }
+  let(:user) { build_user }
 
   it 'Returns a valid match' do
     match = build(:match)

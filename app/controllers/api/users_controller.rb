@@ -11,4 +11,3 @@ class Api::UsersController < Api::BaseController
     @user = User.find(params[:id])
   end
 end
-
