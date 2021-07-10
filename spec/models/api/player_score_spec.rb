@@ -17,7 +17,7 @@ RSpec.describe Api::PlayerScore, type: :model do
 
       user_score = create(:player_score, match: match)
       opponent_score = create(
-        :player_score, 
+        :player_score,
         match: match,
         name: 'Jerry',
         owner: false,

@@ -5,6 +5,7 @@ require 'rails_helper'
 describe Api::MatchesController, type: :request do
   let (:user) { build_user }
   let (:created_user) { create_user }
+  let (:opponent_score) { build_opponent_score }
 
   context 'When fetching a users matches' do
     before do
@@ -52,15 +53,41 @@ describe Api::MatchesController, type: :request do
   context 'When creating a match' do
     before do
       match = build(:match)
+      owner_score = build(:player_score)
+
       login_with_api(created_user)
       post '/api/matches', headers: {
         'Authorization': response.headers['Authorization']
       },
       params: {
-        title: match.title,
-        battle_size: match.battle_size,
-        mission: match.mission,
-        result: 'win'
+        match: {
+          title: match.title,
+          battle_size: match.battle_size,
+          mission: match.mission,
+          result: 'win',
+          player_scores_attributes: [
+            {
+              name: owner_score.name,
+              owner: owner_score.owner,
+              attacker: owner_score.attacker,
+              first_turn: owner_score.first_turn,
+              faction: owner_score.faction,
+              primaries_score: owner_score.primaries_score,
+              secondaries_score: owner_score.secondaries_score,
+              total_vp: owner_score.total_vp
+            },
+            {
+              name: opponent_score.name,
+              owner: opponent_score.owner,
+              attacker: opponent_score.attacker,
+              first_turn: opponent_score.first_turn,
+              faction: opponent_score.faction,
+              primaries_score: opponent_score.primaries_score,
+              secondaries_score: opponent_score.secondaries_score,
+              total_vp: opponent_score.total_vp
+            }
+          ]
+        }
       }
     end
 
