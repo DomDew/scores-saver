@@ -1,7 +1,17 @@
 class Api::V1::BaseController < ApplicationController
   before_action :authenticate_user!
 
+  rescue_from ActiveRecord::RecordInvalid, with: :bad_request
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
+  def bad_request
+    render json: {
+      'errors': [
+        'status': '400',
+        'title': 'Bad request'
+      ]
+    }, status: 400
+  end
 
   def not_found
     render json: {

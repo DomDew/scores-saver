@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :player_score, class: 'api/player_score' do
+  factory :player_score, class: 'api/v1/player_score' do
     name { 'Tom' }
     owner { true }
     attacker { false }

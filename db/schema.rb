@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_15_123148) do
+ActiveRecord::Schema.define(version: 2021_07_15_141931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,21 @@ ActiveRecord::Schema.define(version: 2021_07_15_123148) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_api_v1_matches_on_user_id"
+  end
+
+  create_table "api_v1_player_scores", force: :cascade do |t|
+    t.boolean "attacker"
+    t.boolean "first_turn"
+    t.boolean "owner"
+    t.string "name"
+    t.string "faction"
+    t.integer "primaries_score"
+    t.integer "secondaries_score"
+    t.integer "total_vp"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "api_v1_match_id", null: false
+    t.index ["api_v1_match_id"], name: "index_api_v1_player_scores_on_api_v1_match_id"
   end
 
   create_table "jwt_denylist", force: :cascade do |t|
@@ -45,4 +60,5 @@ ActiveRecord::Schema.define(version: 2021_07_15_123148) do
   end
 
   add_foreign_key "api_v1_matches", "users"
+  add_foreign_key "api_v1_player_scores", "api_v1_matches"
 end

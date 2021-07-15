@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  boolean: 
+  boolean: 
+  boolean: 
+  name: MyString
+  faction: MyString
+  integer: 
+  integer: 
+  integer: 
+  references: 
+
+two:
+  boolean: 
+  boolean: 
+  boolean: 
+  name: MyString
+  faction: MyString
+  integer: 
+  integer: 
+  integer: 
+  references: 
