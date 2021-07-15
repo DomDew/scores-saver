@@ -8,7 +8,6 @@ describe Api::V1::UsersController, type: :request do
   context 'When fetching a user' do
     before do
       login_with_api(user)
-      binding.pry
       get "/api/v1/users/#{user.id}", headers: {
         'Authorization': response.headers['Authorization']
       }
