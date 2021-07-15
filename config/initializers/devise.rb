@@ -14,7 +14,6 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-
   config.secret_key = ENV['DEVISE_SECRET_KEY']
 
   # ==> Controller configuration
@@ -127,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '9471d7c9ac0391026b491452fdcfc2b6373c3c58d2865938547f8751b4bd41c26f7e22e716220faf4cf5c14ad5736fe938e981c30b42102f8402ce084cfe8627'
+  # config.pepper = '8cfcce616b947d994b9ee3cd80125db1d0bf3ab614f26a8307c7820725efafbde2e18e0e96efd9708fa4918df0a6b05f33e598ab963ad403051a85e875e9e5d1'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -310,7 +309,7 @@ Devise.setup do |config|
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
 
-  # jwt Settings
+  # *** JWT SETTINGS ***
   config.jwt do |jwt|
     jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
     jwt.dispatch_requests = [
