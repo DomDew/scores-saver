@@ -15,5 +15,11 @@ RSpec.describe Api::V1::Match, type: :model do
 
       expect(created_match).to be_present
     end
+
+    it 'returns 400 for an invalid match' do
+      create(:match, user: user, battle_size: 'Not in the list')
+
+      expect(response.status).to eq(400)
+    end
   end
 end
