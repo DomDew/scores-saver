@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::Match, type: :model do
+RSpec.describe Api::V1::Match, type: :model do
   let(:user) { build_user }
 
   it 'Returns a valid match' do

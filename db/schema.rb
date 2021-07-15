@@ -10,45 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_15_092044) do
+ActiveRecord::Schema.define(version: 2021_07_15_123148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "api_matches", force: :cascade do |t|
+  create_table "api_v1_matches", force: :cascade do |t|
     t.string "title"
     t.string "battle_size"
     t.string "mission"
-    t.decimal "result"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "result"
     t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_api_matches_on_user_id"
-  end
-
-  create_table "api_player_scores", force: :cascade do |t|
-    t.boolean "attacker"
-    t.string "name"
-    t.string "faction"
-    t.decimal "primaries_score"
-    t.decimal "secondaries_score"
-    t.decimal "total_vp"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "api_match_id", null: false
-    t.boolean "owner"
-    t.boolean "first_turn"
-    t.index ["api_match_id"], name: "index_api_player_scores_on_api_match_id"
-  end
-
-  create_table "api_v1_matches", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "api_v1_player_scores", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_api_v1_matches_on_user_id"
   end
 
   create_table "jwt_denylist", force: :cascade do |t|
@@ -69,6 +44,5 @@ ActiveRecord::Schema.define(version: 2021_07_15_092044) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "api_matches", "users"
-  add_foreign_key "api_player_scores", "api_matches"
+  add_foreign_key "api_v1_matches", "users"
 end
