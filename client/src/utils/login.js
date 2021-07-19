@@ -1,5 +1,3 @@
-import useLocalStorage from "./useLocalStorage";
-
 export const login = async () => {
   try {
     const userDetails = { 
@@ -7,8 +5,6 @@ export const login = async () => {
       email: "juergen@dose.de", password: "123456"
       }
     }
-
-    console.log(JSON.stringify(userDetails))
 
     const url = "http://localhost:3001/api/v1/login"
     const res = await fetch(url, {
@@ -18,13 +14,12 @@ export const login = async () => {
       },
       body: JSON.stringify(userDetails)
     });
-    console.log(res.status)
-    console.log(res.headers.get('header_key'))
-    console.log(res.headers.get('Authorization'))
-    console.log(res)
+
+    const accessToken = res.headers.get("Authorization")
     const data = await res.json()
-    console.log(data)
-    return data
+  
+    return { data, accessToken }
+
   }catch(err) {
     console.error(err)
   }
