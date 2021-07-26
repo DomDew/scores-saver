@@ -15,10 +15,10 @@ export default function Home() {
   return (
     <div className="home-background">
       <img src={logo} className="home-logo" alt="The Scores Saver Logo: A die showing the number five ontop of two crossed measures with the text 'Scores Saver' beneath" />
-      <h3 classname="subheader">Keep track of your tabletop scores. <br></br>Anytime, anywhere!</h3>
+      <h3 className="subheader">Keep track of your tabletop scores. <br></br>Anytime, anywhere!</h3>
       <Link to="/login">
         <MainButton btnText="get started" />
-        </Link>
+      </Link>
     </div>
   )
 }
