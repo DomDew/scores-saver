@@ -13,6 +13,8 @@ export default function LandingPage() {
     <h1>Landing Page</h1>
     <pre>{JSON.stringify(user, null, 2)}</pre>
     
+    
+
     <button 
     onClick={async () => {
       const day = 60 * 60 * 24 * 1000;

@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import LandingPage from "./components/LandingPage";
+import Home from "./components/Home";
 import { UserContext } from "./utils/UserContext";
 
 export default function AppRouter() {
@@ -16,7 +16,7 @@ export default function AppRouter() {
     <Router>
       <Switch>
         <UserContext.Provider value={userValue}>
-          <Route path="/" exact component={LandingPage} />
+          <Route path="/" exact component={Home} />
         </UserContext.Provider>
       </Switch>
     </Router>
