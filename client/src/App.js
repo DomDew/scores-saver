@@ -1,11 +1,15 @@
+// DEPENDENCIES
 import React, { useState, useMemo } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import Home from "./components/Home";
 import { UserContext } from "./utils/UserContext";
+
+// COMPONENTS
+import Home from "./components/Home";
+import Login from "./components/Login";
 
 export default function AppRouter() {
   const [user, setUser] = useState(null)
@@ -17,6 +21,7 @@ export default function AppRouter() {
       <Switch>
         <UserContext.Provider value={userValue}>
           <Route path="/" exact component={Home} />
+          <Route path="/login" component={Login} />
         </UserContext.Provider>
       </Switch>
     </Router>
