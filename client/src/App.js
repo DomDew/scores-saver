@@ -11,6 +11,11 @@ import { UserContext } from "./utils/UserContext";
 import Home from "./components/Home";
 import Login from "./components/Login";
 
+// STYLES
+import './styles/_main-container.scss'
+import './styles/_fonts.scss'
+import './styles/_main-button.scss'
+
 export default function AppRouter() {
   const [user, setUser] = useState(null)
 

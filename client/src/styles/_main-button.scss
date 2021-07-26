@@ -1,0 +1,14 @@
+@use '_colors' as *;
+
+.btn-main {
+  border: none;
+  background-color: $main-green;
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Karla', sans-serif;
+  border-radius: 5px;
+  color: white;
+  width: 200px;
+  padding: 12px;
+}

@@ -1,9 +1,6 @@
 // DEPENDENCIES
 import React from 'react'
 
-// STYLES
-import './styles/MainButton.scss'
-
 export default function MainButton(props) {
   return (
     <>
