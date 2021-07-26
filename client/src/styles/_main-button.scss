@@ -2,7 +2,7 @@
 
 .btn-main {
   border: none;
-  background-color: $main-green;
+  background: linear-gradient(to right, $main-green,$main-darker-green);
   text-transform: uppercase;
   font-size: 24px;
   font-weight: bold;
@@ -10,5 +10,6 @@
   border-radius: 5px;
   color: white;
   width: 200px;
+  height: 60px;
   padding: 12px;
 }

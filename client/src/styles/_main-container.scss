@@ -2,9 +2,10 @@
 
 .main-container {
   background-color: $main-dark-grey;
-  height: 100vh;
+  height: 80vh;
+  padding: 10vh 10vw;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
 }

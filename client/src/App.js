@@ -6,6 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import { UserContext } from "./utils/UserContext";
+import ReactCSSTransitionGroup from 'react-transition-group';
 
 // COMPONENTS
 import Home from "./components/Home";
@@ -15,6 +16,7 @@ import Login from "./components/Login";
 import './styles/_main-container.scss'
 import './styles/_fonts.scss'
 import './styles/_main-button.scss'
+import './styles/_subheader.scss'
 
 export default function AppRouter() {
   const [user, setUser] = useState(null)
