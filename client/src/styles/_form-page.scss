@@ -1,3 +1,5 @@
+@use './colors' as *;
+
 .form-page-background {
   position: absolute;
   top: 0;
@@ -9,4 +11,41 @@
 .form-page-header {
   position: relative;
   z-index: 300;
+}
+
+.logsignin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+}
+
+.logsignin-form-input {
+  width: 100%;
+  height: 40px;
+  padding-left: 6px;
+  background-color: $main-grey;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 6px;
+  &[type="text"] {
+    font-size: 16px;
+    color: $main-green;
+  }
+  &[type="password"] {
+    font-size: 16px;
+    color: $main-green;
+  }
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  &:focus {
+    border-bottom: 2px solid $main-green;
+    color: $main-green;
+    outline: none;
+  }
+  &::placeholder {
+    color: $lighter-grey;
+  }
 }

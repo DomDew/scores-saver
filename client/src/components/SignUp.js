@@ -42,6 +42,7 @@ export default function Login(props) {
         </header>
       </motion.div>
 
+      
       <p>Already have an account? <Link to={{
         pathname: "/login",
         fromLink: true

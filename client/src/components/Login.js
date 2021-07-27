@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
 // COMPONENTS
-import MainButton from './MainButton'
+import SubmitButton from './SubmitButton'
 
 // IMAGES
 import formPageBackground from '../images/form-page-background.svg'
@@ -14,6 +14,10 @@ export default function Login(props) {
 
   const handleClick = () => {
     setLinkClicked(true)
+  }
+
+  const handleLogin = () => {
+
   }
 
   return (
@@ -37,25 +41,31 @@ export default function Login(props) {
         transition={{ duration: 1 }}
       >
         <header className="form-page-header">
-          <h1>Welcome <br /> back</h1>
+          <h1>Welcome</h1>
+          <h1>back</h1>
           <p>Log-in to see your scores</p>
         </header>
       </motion.div>
-        
-      <p>Don't have an account? <Link to={{
-        pathname: "/signup",
-        fromLink: true
-        }} 
-        onClick={handleClick}>Sign-up!</Link> </p>
+      <form className="logsignin-form">
+        <input className="logsignin-form-input" type="text" name="email" placeholder="email"/>
+        <input className="logsignin-form-input" type="password" name="password" placeholder="password" />
+        <p>
+          Don't have an account? <Link to={{
+            pathname: "/signup",
+            fromLink: true
+            }} 
+            onClick={handleClick}>Sign-up!</Link> 
+        </p>
+      </form>
 
-      <motion.div
-          initial={linkClicked ? {visibility: false} : {scaleX: 0}}
-          animate={linkClicked ? {visibility: true} : {scaleX: 1}}
-          exit={linkClicked ? {visibility: false} : {scaleX: 0}}
-          transition={linkClicked ? { duration: 0 } : { duration: 0.5, ease: "easeInOut"}}
-        >
-          <MainButton btnText="login" />
-        </motion.div>
+        <motion.div
+            initial={linkClicked ? {visibility: false} : {scaleX: 0}}
+            animate={linkClicked ? {visibility: true} : {scaleX: 1}}
+            exit={linkClicked ? {visibility: false} : {scaleX: 0}}
+            transition={linkClicked ? { duration: 0 } : { duration: 0.5, ease: "easeInOut"}}
+          >
+            <SubmitButton btnText="login" />
+          </motion.div>
     </div>
   )
 }
