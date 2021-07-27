@@ -25,10 +25,10 @@ export default function Home() {
           }}
         >
           <header style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            minHeight: '400px'
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            minHeight: "400px"
           }
           }>
             <img src={logo} className="home-logo" alt="The Scores Saver Logo: A die showing the number five ontop of two crossed measures with the text 'Scores Saver' beneath" />
@@ -44,7 +44,10 @@ export default function Home() {
             ease: "easeInOut"
           }}
         >
-          <Link to="/login">
+          <Link to={{
+            pathname: "/login",
+            fromLink: false
+          }}>
             <MainButton btnText="get started" />
           </Link>
         </motion.div>
