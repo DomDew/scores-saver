@@ -3,7 +3,7 @@ export default function useLocalStorage(key) {
     if (process.browser) {
       try {
         const now = new Date()
-
+        
         const item = {
           value: value,
           expiry: now.getTime() + ttl

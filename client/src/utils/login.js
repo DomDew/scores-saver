@@ -1,26 +1,21 @@
-export const login = async () => {
+export const login = async (email, password) => {
+  const axios = require('axios')
+
   try {
-    const userDetails = { 
-      user: {
-      email: "juergen@dose.de", password: "123456"
-      }
-    }
+    const userDetails = { email: email, password: password }
 
     const url = "http://localhost:3001/api/v1/login"
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(userDetails)
+    const res = await axios.post(url, {
+      headers: { "Content-Type": "application/json" },
+      user: userDetails
     });
 
-    const accessToken = res.headers.get("Authorization")
-    const data = await res.json()
+    const accessToken = await res.headers.authorization
+    const data = await res
   
     return { data, accessToken }
 
   }catch(err) {
-    console.error(err)
+    return err
   }
 }

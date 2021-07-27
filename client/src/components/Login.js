@@ -8,13 +8,17 @@ import FormPageBackround from './FormPageBackround'
 import FormPageHeader from './FormPageHeader'
 import FormPageSwitchLink from './FormPageSwitchLink'
 
+// UTILS
+import useLocalStorage from '../utils/useLocalStorage'
+import { login } from '../utils/login'
+
 export default function Login(props) {
-  const axios = require('axios')
   const [linkClicked, setLinkClicked] = useState(props.location.fromLink)
   const [loading, setLoading] = useState(false)
   const email = useFormInput('')
   const password = useFormInput('')
   const [error, setError] = useState(null)
+  const { setItemWithExpiry } = useLocalStorage("access-token")
 
   const handleClick = () => {
     setLinkClicked(true)
@@ -22,16 +26,13 @@ export default function Login(props) {
 
   const handleLogin = () => {
     setLoading(true)
+    const hour = 3600000;
     // POST userdata, set access-token with response token, redirect if status 200 and token has been set, if not, set errors.
-    axios.post("http://localhost:3001/api/v1/login", {
-      headers: {'Content-type': 'application/json'},
-      user: {
-        email: email.value,
-        password: password.value
-      }
-    }).then(res => {
-      console.log(res)
-    })
+    login(email.value, password.value)
+      .then(res => { 
+          setItemWithExpiry(res.accessToken, hour)
+        }
+      ).catch(err => console.error(err))
   }
 
   return (

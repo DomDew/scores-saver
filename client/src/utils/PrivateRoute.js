@@ -1,12 +1,20 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router'
-import authenticate from './authenticate'
+import useLocalStorage from './useLocalStorage'
 
 export default function PrivateRoute({component: Component, ...rest}) {
-  return (
-    <Route {...rest} render={() => {
-        return authenticate() === true ? Component : <Redirect to='/login' />
-      }}
-    />
-  )
+  const { getItemWithExpiry } = useLocalStorage("access-token")
+  const accessToken = getItemWithExpiry()
+
+  if (accessToken != null) {
+    return (
+      <Route {...rest}
+        component={Component}
+      />
+    )
+  } else {
+    return (
+      <Redirect to="/login" />
+    )
+  }
 }
