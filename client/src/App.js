@@ -8,6 +8,9 @@ import {
 // import { UserContext } from './utils/UserContext';
 import { AnimatePresence } from 'framer-motion'
 
+// UTILS
+import PrivateRoute from './utils/PrivateRoute';
+
 // COMPONENTS
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
@@ -34,7 +37,7 @@ export default function AppRouter() {
           <Route path="/" exact component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
         </Switch>
       </AnimatePresence>
   );
