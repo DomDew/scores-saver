@@ -9,6 +9,7 @@ import {
 import { AnimatePresence } from 'framer-motion'
 
 // COMPONENTS
+import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
@@ -33,6 +34,7 @@ export default function AppRouter() {
           <Route path="/" exact component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </AnimatePresence>
   );

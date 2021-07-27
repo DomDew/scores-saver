@@ -14,7 +14,7 @@ export default function FormPageAnimatedButton(props) {
           exit={props.linkClicked ? {visibility: false} : {scaleX: 0}}
           transition={props.linkClicked ? { duration: 0 } : { duration: 0.5, ease: "easeInOut"}}
         >
-          <SubmitButton btnText={props.btnText} />
+          <SubmitButton btnText={props.btnText} onClick={props.onClick} disabled={props.disabled} />
     </motion.div>
     </>
   )

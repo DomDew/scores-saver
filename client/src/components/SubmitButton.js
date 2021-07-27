@@ -3,6 +3,6 @@ import React from 'react'
 
 export default function SubmitButton(props) {
   return (
-    <button type="submit" className="btn-main">{props.btnText}</button>
+    <button type="submit" onClick={props.onClick} className="btn-main" disabled={props.disabled}>{props.btnText}</button>
   )
 }

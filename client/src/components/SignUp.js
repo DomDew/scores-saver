@@ -1,5 +1,6 @@
 // DEPENDENCIES
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 
 // COMPONENTS
 import FormPageAnimatedButton from './FormPageAnimatedButton'
@@ -27,7 +28,13 @@ export default function Login(props) {
         subheader="Sign-up to track your scores" 
       />
       
-      <form className="logsignin-form">
+      <motion.form 
+        className="logsignin-form"
+        initial={linkClicked ? { visibility: false } : { opacity: 0 }}
+        animate={linkClicked ? { visibility: true } : { opacity: 1 }}
+        exit={linkClicked ? { visibility: false } : { opacity: 0 }}
+        transition={linkClicked ? { duration: 0 } : { duration: 0.7 }}
+      >
         <input className="logsignin-form-input" type="text" name="email" placeholder="email"/>
         <input className="logsignin-form-input" type="password" name="password" placeholder="password" />
         <input className="logsignin-form-input" type="password" name="confirm-password" placeholder="confirm password" />
@@ -37,7 +44,7 @@ export default function Login(props) {
           path="/login"
           handleClick={handleClick}
         />
-      </form>
+      </motion.form>
 
       <FormPageAnimatedButton linkClicked={linkClicked} btnText="login" />
     </div>
