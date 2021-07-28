@@ -27,22 +27,6 @@ export default function Login(props) {
     setLinkClicked(true)
   }
 
-  // const handleLogin = async () => {
-  //   setLoading(true)
-  //   setError('')
-  //   const hour = 3600000;
-  //   try {
-  //     const loginRes = await login(email.value, password.value)
-
-  //     setItemWithExpiry(loginRes.accessToken, hour)
-  //     props.history.push("/dashboard")
-  //   } catch (error) {
-  //     error.response.status === 401 ? setError("Incorrect username or password!") : setError("Something went wrong... please try again")
-  //   } finally {
-  //     setLoading(false)
-  //   }
-  // }
-
   const handleSignUp = async () => {
     setLoading(true)
     setError('')
