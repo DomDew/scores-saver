@@ -5,12 +5,15 @@
   top: 0;
   left: 0;
   max-width: 100vh;
-  z-index: 0;
+  z-index: 1;
+}
+
+.header-animator {
+  z-index: 5;
 }
 
 .form-page-header {
   position: relative;
-  z-index: 300;
 }
 
 .logsignin-form {
@@ -20,6 +23,7 @@
   align-items: center;
   margin-top: 50px;
   width: 80vw;
+  z-index: 0;
 }
 
 .logsignin-form-input {

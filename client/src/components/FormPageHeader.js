@@ -6,6 +6,7 @@ export default function FormPageHeader(props) {
   return (
     <>
       <motion.div
+        className="header-animator"
         style={{ width: '100%' }}
         initial={ props.linkClicked ? {opacity: 0} : { y: -800 }}
         animate={ props.linkClicked ? {opacity: 1} : { y: 0 }}

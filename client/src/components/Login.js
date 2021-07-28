@@ -1,7 +1,6 @@
 // DEPENDENCIES
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Redirect } from 'react-router'
 
 // COMPONENTS
 import FormPageAnimatedButton from './FormPageAnimatedButton'
