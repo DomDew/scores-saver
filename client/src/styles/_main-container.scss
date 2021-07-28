@@ -1,0 +1,12 @@
+@use '_colors' as *;
+
+.main-container {
+  background-color: $main-dark-grey;
+  height: 80vh;
+  padding: 10vh 10vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}

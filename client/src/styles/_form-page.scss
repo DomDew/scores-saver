@@ -1,0 +1,56 @@
+@use './colors' as *;
+
+.form-page-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100vh;
+  z-index: 1;
+}
+
+.header-animator {
+  z-index: 5;
+}
+
+.form-page-header {
+  position: relative;
+}
+
+.logsignin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  width: 80vw;
+  z-index: 0;
+}
+
+.logsignin-form-input {
+  width: 100%;
+  height: 40px;
+  padding-left: 6px;
+  background-color: $main-grey;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 6px;
+  &[type="text"] {
+    font-size: 16px;
+    color: $main-green;
+  }
+  &[type="password"] {
+    font-size: 16px;
+    color: $main-green;
+  }
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  &:focus {
+    border-bottom: 2px solid $main-green;
+    color: $main-green;
+    outline: none;
+  }
+  &::placeholder {
+    color: $lighter-grey;
+  }
+}
