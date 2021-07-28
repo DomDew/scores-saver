@@ -10,7 +10,7 @@ export default function useLocalStorage(key) {
         }
         window && window.localStorage.setItem(key, JSON.stringify(item));
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   };
@@ -33,7 +33,7 @@ export default function useLocalStorage(key) {
 
         return item.value
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   };
@@ -43,7 +43,7 @@ export default function useLocalStorage(key) {
       try {
         window && window.localStorage.removeItem(key);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   };

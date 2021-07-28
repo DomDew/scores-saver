@@ -1,11 +1,10 @@
 // DEPENDENCIES
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import {
   Switch,
   Route,
   useLocation
 } from 'react-router-dom';
-// import { UserContext } from './utils/UserContext';
 import { AnimatePresence } from 'framer-motion'
 
 // UTILS
@@ -26,9 +25,6 @@ import './styles/_home-logo.scss'
 import './styles/_form-page.scss'
 
 export default function AppRouter() {
-  // const [user, setUser] = useState(null)
-
-  // const userValue = useMemo(() => ({user, setUser}), [user, setUser]);
   const location = useLocation();
 
   return (

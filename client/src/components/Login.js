@@ -1,12 +1,14 @@
 // DEPENDENCIES
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import { Redirect } from 'react-router'
 
 // COMPONENTS
 import FormPageAnimatedButton from './FormPageAnimatedButton'
 import FormPageBackround from './FormPageBackround'
 import FormPageHeader from './FormPageHeader'
 import FormPageSwitchLink from './FormPageSwitchLink'
+import ErrorMessage from './ErrorMessage'
 
 // UTILS
 import useLocalStorage from '../utils/useLocalStorage'
@@ -24,15 +26,20 @@ export default function Login(props) {
     setLinkClicked(true)
   }
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setLoading(true)
+    setError('')
     const hour = 3600000;
-    // POST userdata, set access-token with response token, redirect if status 200 and token has been set, if not, set errors.
-    login(email.value, password.value)
-      .then(res => { 
-          setItemWithExpiry(res.accessToken, hour)
-        }
-      ).catch(err => console.error(err))
+    try {
+      const loginRes = await login(email.value, password.value)
+
+      setItemWithExpiry(loginRes.accessToken, hour)
+      props.history.push("/dashboard")
+    } catch (error) {
+      error.response.status === 401 ? setError("Incorrect username or password!") : setError("Something went wrong... please try again")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -45,12 +52,14 @@ export default function Login(props) {
       />
       
       <motion.form 
+        style={{position: 'relative'}}
         className="logsignin-form"
         initial={linkClicked ? { visibility: false } : { opacity: 0 }}
         animate={linkClicked ? { visibility: true } : { opacity: 1 }}
         exit={linkClicked ? { visibility: false } : { opacity: 0 }}
         transition={linkClicked ? { duration: 0 } : { duration: 0.7 }}
       >
+        <ErrorMessage error={error} style={{position: 'absolute', top: '-24px'}} />
         <input className="logsignin-form-input" type="text" {...email} name="email" placeholder="email"/>
         <input className="logsignin-form-input" type="password" {...password} name="password" placeholder="password" />
         <FormPageSwitchLink 
