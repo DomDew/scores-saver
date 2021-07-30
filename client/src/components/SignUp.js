@@ -2,8 +2,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import validator from 'validator'
-import * as Yup from 'yup'
-import { Formik } from 'formik'
 
 // COMPONENTS
 import FormPageAnimatedButton from './FormPageAnimatedButton'
