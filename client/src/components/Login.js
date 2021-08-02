@@ -1,9 +1,10 @@
 // DEPENDENCIES
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import { Formik, Form, Field } from 'formik'
+import * as Yup from 'yup'
 
 // COMPONENTS
-import FormPageAnimatedButton from './FormPageAnimatedButton'
 import FormPageBackround from './FormPageBackround'
 import FormPageHeader from './FormPageHeader'
 import FormPageSwitchLink from './FormPageSwitchLink'
@@ -13,32 +14,35 @@ import ErrorMessage from './ErrorMessage'
 import useLocalStorage from '../utils/useLocalStorage'
 import { login } from '../utils/login'
 
+const LoginSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Invalid email')
+      .required('Required'),
+    password: Yup.string()
+      .required('Required')
+  })
+
 export default function Login(props) {
   const [linkClicked, setLinkClicked] = useState(props.location.fromLink)
-  const [loading, setLoading] = useState(false)
-  const email = useFormInput('')
-  const password = useFormInput('')
-  const [error, setError] = useState(null)
+  const [loginError, setLoginError] = useState(null)
   const { setItemWithExpiry } = useLocalStorage("access-token")
 
   const handleClick = () => {
     setLinkClicked(true)
   }
 
-  const handleLogin = async () => {
-    setLoading(true)
-    setError('')
+  const handleLogin = async (values, setSubmitting) => {
+    setLoginError('')
     const hour = 3600000;
     try {
-      const loginRes = await login(email.value, password.value)
+      const loginRes = await login(values.email, values.password)
 
       setItemWithExpiry(loginRes.accessToken, hour)
       props.history.push("/dashboard")
     } catch (error) {
-      error.response.status === 401 ? setError("Incorrect username or password!") : setError("Something went wrong... please try again")
-    } finally {
-      setLoading(false)
+      error.response.status === 401 ? setLoginError("Incorrect username or password!") : setLoginError("Something went wrong... please try again")
     }
+    setSubmitting(false)
   }
 
   return (
@@ -50,43 +54,68 @@ export default function Login(props) {
         subheader="Log-in to see your scores" 
       />
       
-      <motion.form 
-        style={{position: 'relative'}}
-        className="logsignin-form"
+      <motion.div 
+        style={{position: 'relative', height: "50%"}}
         initial={linkClicked ? { visibility: false } : { opacity: 0 }}
         animate={linkClicked ? { visibility: true } : { opacity: 1 }}
         exit={linkClicked ? { visibility: false } : { opacity: 0 }}
         transition={linkClicked ? { duration: 0 } : { duration: 0.7 }}
       >
-        <ErrorMessage error={error} style={{position: 'absolute', top: '-24px'}} />
-        <input className="logsignin-form-input" type="text" {...email} name="email" placeholder="email"/>
-        <input className="logsignin-form-input" type="password" {...password} name="password" placeholder="password" />
-        <FormPageSwitchLink 
-          pText="Dont have an account? " 
-          linkText="Sign-up!"
-          path="/signup"
-          handleClick={handleClick}
-        />
-      </motion.form>
-
-      <FormPageAnimatedButton 
-        linkClicked={linkClicked} 
-        btnText={loading ? "loading..." : "login"} 
-        onClick={handleLogin}
-        disabled={loading}
-      />
+        <Formik
+          initialValues={{
+            email: '',
+            password: ''
+          }}
+          validationSchema={LoginSchema}
+          onSubmit={(values, { setSubmitting }) => {
+            handleLogin(values, setSubmitting)
+          }}
+        >
+          {({ values, errors, touched, handleChange, isSubmitting, handleBlur }) => (
+            <Form className="logsignin-form">
+              <div className="form-group">
+              <ErrorMessage error={loginError} />
+                {errors.email && touched.email ? (
+                  <ErrorMessage error={errors.email} />
+                ) : null}
+                <Field 
+                  name="email" 
+                  className={errors.email && touched.email ? "form-input form-input-error" : "form-input"}
+                  type="text"
+                  value={values.email}
+                  placeholder="email"
+                  onChange={handleChange}
+                  error={touched.email && errors.email}
+                />
+                {errors.password && touched.password ? (
+                <ErrorMessage error={errors.password} />
+                ) : null}
+                <Field 
+                  name="password"
+                  className={errors.password && touched.password ? "form-input form-input-error" : "form-input"}
+                  type="password"
+                  value={values.password}
+                  placeholder="password"
+                  onChange={handleChange}
+                  error={touched.password && errors.password}
+                />
+                <FormPageSwitchLink 
+                  pText="Dont have an account? " 
+                  linkText="Sign-up!"
+                  path="/signup"
+                  handleClick={handleClick}
+                />
+              </div>
+              <button
+                className="btn-main" 
+                type="submit" disabled={isSubmitting || errors.email || errors.password}
+              >
+                {isSubmitting ? "Loading..." : "login"}
+              </button>
+            </Form>
+          )}
+        </Formik>
+      </motion.div>
     </div>
   )
-}
-
-const useFormInput = initialValue => {
-  const [value, setValue] = useState(initialValue)
-  
-  const handleChange = e => {
-    setValue(e.target.value)
-  }
-  return {
-    value,
-    onChange: handleChange
-  }
 }

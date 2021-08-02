@@ -4,7 +4,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  max-width: 100vh;
+  width: 100vw;
+  height: 35vh;
+  min-height: 250px;
   z-index: 1;
 }
 
@@ -19,14 +21,15 @@
 .logsignin-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 50px;
+  height: 100%;
   width: 80vw;
+  max-width: 500px;
   z-index: 0;
 }
 
-.logsignin-form-input {
+.form-input {
   width: 100%;
   height: 40px;
   padding-left: 6px;
@@ -52,5 +55,8 @@
   }
   &::placeholder {
     color: $lighter-grey;
+  }
+  &.form-input-error {
+    border-bottom: 2px solid $error-red;
   }
 }
