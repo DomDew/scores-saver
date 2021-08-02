@@ -1,7 +1,6 @@
 // DEPENDENCIES
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Redirect } from 'react-router'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 
@@ -35,11 +34,11 @@ export default function Login(props) {
 
   const handleLogin = async (values, setSubmitting) => {
     setLoginError('')
-    const hour = 3600000;
+    const day = 86400000
     try {
       const loginRes = await login(values.email, values.password)
 
-      setItemWithExpiry(loginRes.accessToken, hour)
+      setItemWithExpiry(loginRes.accessToken, day)
       props.history.push("/dashboard")
     } catch (error) {
       error.response.status === 401 ? setLoginError("Incorrect username or password!") : setLoginError("Something went wrong... please try again")

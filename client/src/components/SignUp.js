@@ -39,11 +39,11 @@ export default function Login(props) {
 
   const handleSignup = async (values, setSubmitting) => {
     setSignupError('')
-    const hour = 3600000;
+    const day = 86400000
     try {
       const signupRes = await signup(values.email, values.password)
 
-      setItemWithExpiry(signupRes.accessToken, hour)
+      setItemWithExpiry(signupRes.accessToken, day)
       props.history.push("/dashboard")
     } catch (error) {
       error.response.status === 401 ? setSignupError("Incorrect username or password!") : setSignupError("Something went wrong... please try again")

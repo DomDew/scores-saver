@@ -44,7 +44,7 @@ export default function Home() {
             ease: "easeInOut"
           }}
         >
-          {getItemWithExpiry ? (
+          {getItemWithExpiry() ? (
             <Redirect to="/dashboard" />
           ) : (<Link to={{
             pathname: "/login",
