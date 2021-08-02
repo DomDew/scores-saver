@@ -54,9 +54,9 @@ export default function Login(props) {
     <div className="main-container">
       <FormPageBackround linkClicked={linkClicked} />
       <FormPageHeader linkClicked={linkClicked} 
-        headerLineOne="Welcome" 
-        headerLineTwo="back" 
-        subheader="Log-in to see your scores" 
+        headerLineOne="Glad you are" 
+        headerLineTwo="here" 
+        subheader="Sign-up to track your scores" 
       />
       
       <motion.div 
@@ -125,7 +125,7 @@ export default function Login(props) {
                 className="btn-main" 
                 type="submit" disabled={isSubmitting || errors.email || errors.password}
               >
-                {isSubmitting ? "Loading..." : "login"}
+                {isSubmitting ? "Loading..." : "signup"}
               </button>
             </Form>
           )}
