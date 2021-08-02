@@ -1,6 +1,7 @@
 // DEPENDENCIES
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import { Redirect } from 'react-router'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 
