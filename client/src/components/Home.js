@@ -1,10 +1,8 @@
 // DEPENDENCIES
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { motion } from 'framer-motion'
-
-// COMPONENTS
-import MainButton from './MainButton'
+import useLocalStorage from '../utils/useLocalStorage'
 
 // IMAGES
 import logo from "../images/logo.svg"
@@ -13,6 +11,8 @@ import logo from "../images/logo.svg"
 // wenn user nicht logged in, dann auf login routen
 
 export default function Home() {
+  const { getItemWithExpiry } = useLocalStorage("access-token")
+
   return (
       <div className="main-container">
         <motion.div
@@ -44,12 +44,15 @@ export default function Home() {
             ease: "easeInOut"
           }}
         >
-          <Link to={{
+          {getItemWithExpiry() ? (
+            <Redirect to="/dashboard" />
+          ) : (<Link to={{
             pathname: "/login",
             fromLink: false
           }}>
-            <MainButton btnText="get started" />
-          </Link>
+            <button className="btn-main">Get started</button>
+          </Link>)}
+          
         </motion.div>
       </div>
   )

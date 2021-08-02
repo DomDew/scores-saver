@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Switch,
   Route,
-  useLocation
+  useLocation,
 } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion'
 

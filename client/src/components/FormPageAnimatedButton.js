@@ -2,9 +2,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-// COMPONENTS
-import SubmitButton from './SubmitButton'
-
 export default function FormPageAnimatedButton(props) {
   return (
     <>
@@ -14,7 +11,7 @@ export default function FormPageAnimatedButton(props) {
           exit={props.linkClicked ? {visibility: false} : {scaleX: 0}}
           transition={props.linkClicked ? { duration: 0 } : { duration: 0.5, ease: "easeInOut"}}
         >
-          <SubmitButton btnText={props.btnText} onClick={props.onClick} disabled={props.disabled} />
+          <button type="submit" className="btn-main" disabled={props.disabled}>{props.btnText}</button>
     </motion.div>
     </>
   )
