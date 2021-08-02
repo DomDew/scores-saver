@@ -5,6 +5,7 @@ import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 
 // COMPONENTS
+import FormPageAnimatedButton from './FormPageAnimatedButton'
 import FormPageBackround from './FormPageBackround'
 import FormPageHeader from './FormPageHeader'
 import FormPageSwitchLink from './FormPageSwitchLink'
@@ -106,12 +107,10 @@ export default function Login(props) {
                   handleClick={handleClick}
                 />
               </div>
-              <button
-                className="btn-main" 
-                type="submit" disabled={isSubmitting || errors.email || errors.password}
-              >
-                {isSubmitting ? "Loading..." : "login"}
-              </button>
+              <FormPageAnimatedButton 
+                btnText = {isSubmitting ? "Loading..." : "login"}
+                disabled={isSubmitting || errors.email || errors.password}
+              />
             </Form>
           )}
         </Formik>
