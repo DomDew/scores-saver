@@ -100,7 +100,8 @@ export default function Login(props) {
                   onChange={handleChange}
                   error={touched.password && errors.password}
                 />
-                <FormPageSwitchLink 
+                <FormPageSwitchLink
+                  className="form-switch"
                   pText="Dont have an account? " 
                   linkText="Sign-up!"
                   path="/signup"

@@ -115,7 +115,7 @@ export default function Login(props) {
                   onChange={handleChange}
                   error={touched.confirmPassword && errors.confirmPassword}
                 />
-                <FormPageSwitchLink 
+                <FormPageSwitchLink
                   pText="Already have an account? " 
                   linkText="Log-in!"
                   path="/login"
@@ -123,7 +123,7 @@ export default function Login(props) {
                 />
               </div>
               <FormPageAnimatedButton 
-                btnText = {isSubmitting ? "Loading..." : "login"}
+                btnText = {isSubmitting ? "Loading..." : "signup"}
                 disabled={isSubmitting || errors.email || errors.password}
               />
             </Form>

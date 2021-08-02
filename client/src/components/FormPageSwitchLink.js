@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default function FormPageSwitchLink(props) {
   return (
-    <p>
+    <p className="form-switch">
       {props.pText}
       <Link to={{
         pathname: props.path,
