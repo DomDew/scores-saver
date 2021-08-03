@@ -12,6 +12,7 @@ import FormPageSwitchLink from './FormPageSwitchLink'
 import ErrorMessage from './ErrorMessage'
 
 // UTILS
+import { useLinkClickedStore } from '../utils/linkClickedStore'
 import useLocalStorage from '../utils/useLocalStorage'
 import { login } from '../utils/login'
 
@@ -24,22 +25,24 @@ const LoginSchema = Yup.object().shape({
   })
 
 export default function Login(props) {
-  const [linkClicked, setLinkClicked] = useState(props.location.fromLink)
+  const linkClicked = useLinkClickedStore((state) => state.linkClicked)
+  const setClickedTrue = useLinkClickedStore((state) => state.clickedTrue)
+  const setClickedFalse = useLinkClickedStore((state) => state.clickedFalse)
   const [loginError, setLoginError] = useState(null)
   const { setItemWithExpiry } = useLocalStorage("access-token")
 
-  const handleClick = () => {
-    setLinkClicked(true)
-  }
-
   const handleLogin = async (values, setSubmitting) => {
+    console.log("testing link clicked", linkClicked)
     setLoginError('')
     const day = 86400000
     try {
       const loginRes = await login(values.email, values.password)
 
       setItemWithExpiry(loginRes.accessToken, day)
-      props.history.push("/dashboard")
+
+      if (loginRes.data.status === 200) {
+        props.history.push("/dashboard")
+      }
     } catch (error) {
       error.response.status === 401 ? setLoginError("Incorrect username or password!") : setLoginError("Something went wrong... please try again")
     }
@@ -48,7 +51,7 @@ export default function Login(props) {
 
   return (
     <div className="main-container">
-      <FormPageBackround linkClicked={linkClicked} />
+      <FormPageBackround />
       <FormPageHeader linkClicked={linkClicked} 
         headerLineOne="Welcome" 
         headerLineTwo="back" 
@@ -56,7 +59,7 @@ export default function Login(props) {
       />
       
       <motion.div 
-        style={{position: 'relative', height: "50%"}}
+        style={{position: 'relative', height: "100%"}}
         initial={linkClicked ? { visibility: false } : { opacity: 0 }}
         animate={linkClicked ? { visibility: true } : { opacity: 1 }}
         exit={linkClicked ? { visibility: false } : { opacity: 0 }}
@@ -74,6 +77,7 @@ export default function Login(props) {
         >
           {({ values, errors, touched, handleChange, isSubmitting, handleBlur }) => (
             <Form className="logsignin-form">
+              <div className="spacer"></div>
               <div className="form-group">
               <ErrorMessage error={loginError} />
                 {errors.email && touched.email ? (
@@ -105,11 +109,11 @@ export default function Login(props) {
                   pText="Dont have an account? " 
                   linkText="Sign-up!"
                   path="/signup"
-                  handleClick={handleClick}
+                  handleClick={setClickedTrue}
                 />
               </div>
               <FormPageAnimatedButton 
-                btnText = {isSubmitting ? "Loading..." : "login"}
+                btnText={isSubmitting ? "Loading..." : "login"}
                 disabled={isSubmitting || errors.email || errors.password}
               />
             </Form>
