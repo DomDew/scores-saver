@@ -6,6 +6,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion'
+import create from 'zustand'
 
 // UTILS
 import PrivateRoute from './utils/PrivateRoute';

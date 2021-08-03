@@ -12,6 +12,7 @@ import FormPageSwitchLink from './FormPageSwitchLink'
 import ErrorMessage from './ErrorMessage'
 
 // UTILS
+import { useLinkClickedStore } from '../utils/linkClickedStore'
 import useLocalStorage from '../utils/useLocalStorage'
 import { login } from '../utils/login'
 
@@ -24,18 +25,14 @@ const LoginSchema = Yup.object().shape({
   })
 
 export default function Login(props) {
-  const [linkClicked, setLinkClicked] = useState(props.location.fromLink)
+  const linkClicked = useLinkClickedStore((state) => state.linkClicked)
+  const setClickedTrue = useLinkClickedStore((state) => state.clickedTrue)
+  const setClickedFalse = useLinkClickedStore((state) => state.clickedFalse)
   const [loginError, setLoginError] = useState(null)
   const { setItemWithExpiry } = useLocalStorage("access-token")
 
-  // Call setter in function in order to be able to change state of Login component from inside of Formik component
-  const handleClick = () => {
-    setLinkClicked(true)
-  }
-
   const handleLogin = async (values, setSubmitting) => {
     setLoginError('')
-    setLinkClicked(undefined)
     const day = 86400000
     try {
       const loginRes = await login(values.email, values.password)
@@ -110,11 +107,12 @@ export default function Login(props) {
                   pText="Dont have an account? " 
                   linkText="Sign-up!"
                   path="/signup"
-                  handleClick={handleClick}
+                  handleClick={setClickedTrue}
                 />
               </div>
               <FormPageAnimatedButton 
                 btnText={isSubmitting ? "Loading..." : "login"}
+                onClick={setClickedFalse}
                 linkClicked={linkClicked}
                 disabled={isSubmitting || errors.email || errors.password}
               />
