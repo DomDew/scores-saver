@@ -2,16 +2,22 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
+// UTILS
+import { useLinkClickedStore } from '../utils/linkClickedStore'
+
 export default function FormPageAnimatedButton(props) {
+  const linkClicked = useLinkClickedStore((state) => state.linkClicked)
+  const setClickedFalse = useLinkClickedStore((state) => state.clickedFalse)
+
   return (
     <>
       <motion.div
-        initial={props.linkClicked ? {visibility: false} : {scaleX: 0}}
-        animate={props.linkClicked ? {visibility: true} : {scaleX: 1}}
-        exit={props.linkClicked ? {visibility: false} : {scaleX: 0}}
-        transition={props.linkClicked ? { duration: 0 } : { duration: 0.5, ease: "easeInOut"}}
+        initial={linkClicked ? {visibility: false} : {scaleX: 0}}
+        animate={linkClicked ? {visibility: true} : {scaleX: 1}}
+        exit={linkClicked ? {visibility: false} : {scaleX: 0}}
+        transition={linkClicked ? { duration: 0 } : { duration: 0.5, ease: "easeInOut"}}
       >
-          <button type="submit" className="btn-main" onClick={props.onClick} disabled={props.disabled}>{props.btnText}</button>
+          <button type="submit" className="btn-main" onClick={setClickedFalse} disabled={props.disabled}>{props.btnText}</button>
     </motion.div>
     </>
   )

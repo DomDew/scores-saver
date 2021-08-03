@@ -32,24 +32,26 @@ export default function Login(props) {
   const { setItemWithExpiry } = useLocalStorage("access-token")
 
   const handleLogin = async (values, setSubmitting) => {
+    console.log("testing link clicked", linkClicked)
     setLoginError('')
     const day = 86400000
     try {
       const loginRes = await login(values.email, values.password)
 
       setItemWithExpiry(loginRes.accessToken, day)
-      
-      props.history.push("/dashboard")
+
+      if (loginRes.data.status === 200) {
+        props.history.push("/dashboard")
+      }
     } catch (error) {
       error.response.status === 401 ? setLoginError("Incorrect username or password!") : setLoginError("Something went wrong... please try again")
     }
-    console.log(linkClicked)
     setSubmitting(false)
   }
 
   return (
     <div className="main-container">
-      <FormPageBackround linkClicked={linkClicked} />
+      <FormPageBackround />
       <FormPageHeader linkClicked={linkClicked} 
         headerLineOne="Welcome" 
         headerLineTwo="back" 
@@ -112,8 +114,6 @@ export default function Login(props) {
               </div>
               <FormPageAnimatedButton 
                 btnText={isSubmitting ? "Loading..." : "login"}
-                onClick={setClickedFalse}
-                linkClicked={linkClicked}
                 disabled={isSubmitting || errors.email || errors.password}
               />
             </Form>

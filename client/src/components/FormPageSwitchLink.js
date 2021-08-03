@@ -8,7 +8,6 @@ export default function FormPageSwitchLink(props) {
       {props.pText}
       <Link to={{
         pathname: props.path,
-        fromLink: true
         }} 
         onClick={props.handleClick}>{props.linkText}</Link> 
     </p>

@@ -38,7 +38,7 @@ export default function Login(props) {
 
   const handleSignup = async (values, setSubmitting) => {
     setSignupError('')
-    console.log("submitting")
+
     const day = 86400000
     try {
       const signupRes = await signup(values.email, values.password)
@@ -53,8 +53,8 @@ export default function Login(props) {
 
   return (
     <div className="main-container">
-      <FormPageBackround linkClicked={linkClicked} />
-      <FormPageHeader linkClicked={linkClicked} 
+      <FormPageBackround />
+      <FormPageHeader 
         headerLineOne="Glad you are" 
         headerLineTwo="here" 
         subheader="Sign-up to track your scores" 
@@ -125,8 +125,6 @@ export default function Login(props) {
               </div>
               <FormPageAnimatedButton 
                 btnText={isSubmitting ? "Loading..." : "signup"}
-                onClick={setClickedFalse}
-                linkClicked={linkClicked}
                 disabled={isSubmitting || errors.email || errors.password}
               />
             </Form>
