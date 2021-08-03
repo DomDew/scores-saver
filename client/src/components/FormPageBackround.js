@@ -12,7 +12,7 @@ export default function FormPageBackround(props) {
       <motion.img
         initial={ props.linkClicked ? { scale: 10, rotate: "-20deg" } : { y: -800 }}
         animate={ props.linkClicked ? { scale: 1, rotate: "0deg" } : { y: 0 }}
-        exit={ props.linkClicked ? { scale: 10, rotate: "-20deg" } : { y: -800 }}
+        exit={ props.linkClicked ? { scale: 10, rotate: "-20deg" } : { y: -800 } }
         transition={{ duration: 0.7, ease: "easeInOut" }}
         src={formPageBackground} 
         className="form-page-background" 

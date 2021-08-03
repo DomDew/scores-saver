@@ -28,21 +28,25 @@ export default function Login(props) {
   const [loginError, setLoginError] = useState(null)
   const { setItemWithExpiry } = useLocalStorage("access-token")
 
+  // Call setter in function in order to be able to change state of Login component from inside of Formik component
   const handleClick = () => {
     setLinkClicked(true)
   }
 
   const handleLogin = async (values, setSubmitting) => {
     setLoginError('')
+    setLinkClicked(undefined)
     const day = 86400000
     try {
       const loginRes = await login(values.email, values.password)
 
       setItemWithExpiry(loginRes.accessToken, day)
+      
       props.history.push("/dashboard")
     } catch (error) {
       error.response.status === 401 ? setLoginError("Incorrect username or password!") : setLoginError("Something went wrong... please try again")
     }
+    console.log(linkClicked)
     setSubmitting(false)
   }
 
@@ -56,7 +60,7 @@ export default function Login(props) {
       />
       
       <motion.div 
-        style={{position: 'relative', height: "50%"}}
+        style={{position: 'relative', height: "100%"}}
         initial={linkClicked ? { visibility: false } : { opacity: 0 }}
         animate={linkClicked ? { visibility: true } : { opacity: 1 }}
         exit={linkClicked ? { visibility: false } : { opacity: 0 }}
@@ -74,6 +78,7 @@ export default function Login(props) {
         >
           {({ values, errors, touched, handleChange, isSubmitting, handleBlur }) => (
             <Form className="logsignin-form">
+              <div className="spacer"></div>
               <div className="form-group">
               <ErrorMessage error={loginError} />
                 {errors.email && touched.email ? (
@@ -109,7 +114,8 @@ export default function Login(props) {
                 />
               </div>
               <FormPageAnimatedButton 
-                btnText = {isSubmitting ? "Loading..." : "login"}
+                btnText={isSubmitting ? "Loading..." : "login"}
+                linkClicked={linkClicked}
                 disabled={isSubmitting || errors.email || errors.password}
               />
             </Form>

@@ -33,12 +33,15 @@ export default function Login(props) {
   const [signupError, setSignupError] = useState(null)
   const { setItemWithExpiry } = useLocalStorage("access-token")
 
+  // Call setter in function in order to be able to change state of Login component from inside of Formik component
   const handleClick = () => {
     setLinkClicked(true)
   }
 
   const handleSignup = async (values, setSubmitting) => {
     setSignupError('')
+    setLinkClicked(false)
+    console.log("submitting")
     const day = 86400000
     try {
       const signupRes = await signup(values.email, values.password)
@@ -46,7 +49,7 @@ export default function Login(props) {
       setItemWithExpiry(signupRes.accessToken, day)
       props.history.push("/dashboard")
     } catch (error) {
-      error.response.status === 401 ? setSignupError("Incorrect username or password!") : setSignupError("Something went wrong... please try again")
+      error.response.status === 401 ? setSignupError("Email already taken...") : setSignupError("Something went wrong... please try again")
     }
     setSubmitting(false)
   }
@@ -61,7 +64,7 @@ export default function Login(props) {
       />
       
       <motion.div 
-        style={{position: 'relative', height: "60%"}}
+        style={{position: 'relative', height: "100%"}}
         initial={linkClicked ? { visibility: false } : { opacity: 0 }}
         animate={linkClicked ? { visibility: true } : { opacity: 1 }}
         exit={linkClicked ? { visibility: false } : { opacity: 0 }}
@@ -80,6 +83,7 @@ export default function Login(props) {
         >
           {({ values, errors, touched, handleChange, isSubmitting, handleBlur }) => (
             <Form className="logsignin-form">
+              <div className="spacer"></div>
               <div className="form-group">
               <ErrorMessage error={signupError} />
                 {errors.email && touched.email ? (
@@ -124,6 +128,7 @@ export default function Login(props) {
               </div>
               <FormPageAnimatedButton 
                 btnText = {isSubmitting ? "Loading..." : "signup"}
+                linkClicked={linkClicked}
                 disabled={isSubmitting || errors.email || errors.password}
               />
             </Form>
