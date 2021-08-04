@@ -7,7 +7,6 @@ import { useLinkClickedStore } from '../utils/linkClickedStore'
 
 export default function FormPageAnimatedButton(props) {
   const linkClicked = useLinkClickedStore((state) => state.linkClicked)
-  const setClickedFalse = useLinkClickedStore((state) => state.clickedFalse)
 
   return (
     <>
@@ -17,7 +16,7 @@ export default function FormPageAnimatedButton(props) {
         exit={linkClicked ? {visibility: false} : {scaleX: 0}}
         transition={linkClicked ? { duration: 0 } : { duration: 0.5, ease: "easeInOut"}}
       >
-          <button type="submit" className="btn-main" onClick={setClickedFalse} disabled={props.disabled}>{props.btnText}</button>
+          <button type="submit" className="btn-main" disabled={props.disabled}>{props.btnText}</button>
     </motion.div>
     </>
   )
