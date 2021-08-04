@@ -13,7 +13,6 @@ export default function FormPageBackround(props) {
 
   return (
     <>
-      {console.log(linkClicked)}
       <motion.img
         initial={ linkClicked ? { scale: 10, rotate: "-20deg" } : { y: -800 }}
         animate={ linkClicked ? { scale: 1, rotate: "0deg" } : { y: 0 }}

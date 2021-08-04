@@ -32,7 +32,6 @@ const SignupSchema = Yup.object().shape({
 export default function Login(props) {
   const linkClicked = useLinkClickedStore((state) => state.linkClicked)
   const setClickedTrue = useLinkClickedStore((state) => state.clickedTrue)
-  const setClickedFalse = useLinkClickedStore((state) => state.clickedFalse)
   const [signupError, setSignupError] = useState(null)
   const { setItemWithExpiry } = useLocalStorage("access-token")
 

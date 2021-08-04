@@ -40,9 +40,7 @@ export default function Login(props) {
 
       setItemWithExpiry(loginRes.accessToken, day)
 
-      if (loginRes.data.status === 200) {
-        props.history.push("/dashboard")
-      }
+      props.history.push("/dashboard")
     } catch (error) {
       error.response.status === 401 ? setLoginError("Incorrect username or password!") : setLoginError("Something went wrong... please try again")
     }
