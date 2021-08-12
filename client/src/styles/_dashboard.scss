@@ -1,0 +1,14 @@
+@use "_colors" as *;
+
+.section-folder-container {
+  width: 85vw;
+  height: 10vh;
+  padding: 0 7.5vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
+  &.section-active {
+    background-color: $main-green;
+  }
+}

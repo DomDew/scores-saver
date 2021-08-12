@@ -22,6 +22,7 @@ import "./styles/_form-page.scss";
 import "./styles/_navbar.scss";
 import "./styles/_small-button.scss";
 import "./styles/_app-container.scss";
+import "./styles/_dashboard.scss";
 
 export default function AppRouter() {
   const location = useLocation();
