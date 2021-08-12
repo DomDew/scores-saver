@@ -2,12 +2,12 @@ export default function useLocalStorage(key) {
   const setItemWithExpiry = (value, ttl) => {
     if (process.browser) {
       try {
-        const now = new Date()
-        
+        const now = new Date();
+
         const item = {
           value: value,
-          expiry: now.getTime() + ttl
-        }
+          expiry: now.getTime() + ttl,
+        };
         window && window.localStorage.setItem(key, JSON.stringify(item));
       } catch (error) {
         console.error(error);
@@ -20,18 +20,18 @@ export default function useLocalStorage(key) {
       try {
         const itemJSON = window && window.localStorage.getItem(key);
         if (!itemJSON) {
-          return null
+          return null;
         }
-        
-        const item = JSON.parse(itemJSON)
-        const now = new Date()
+
+        const item = JSON.parse(itemJSON);
+        const now = new Date();
 
         if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return null
+          localStorage.removeItem(key);
+          return null;
         }
 
-        return item.value
+        return item.value;
       } catch (error) {
         console.error(error);
       }
