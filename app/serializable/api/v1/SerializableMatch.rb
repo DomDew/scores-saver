@@ -13,7 +13,9 @@ class Api::V1::SerializableMatch < JSONAPI::Serializable::Resource
     @object.created_at
   end
 
-  has_many :player_scores
+  attribute :player_scores do
+    @object.player_scores
+  end
 
   belongs_to :user
 
