@@ -1,63 +1,64 @@
 // DEPENDENCIES
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Formik, Form, Field } from 'formik'
-import * as Yup from 'yup'
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 
 // COMPONENTS
-import FormPageAnimatedButton from './FormPageAnimatedButton'
-import FormPageBackround from './FormPageBackround'
-import FormPageHeader from './FormPageHeader'
-import FormPageSwitchLink from './FormPageSwitchLink'
-import ErrorMessage from './ErrorMessage'
+import FormPageAnimatedButton from "./FormPageAnimatedButton";
+import FormPageBackround from "./FormPageBackround";
+import FormPageHeader from "./FormPageHeader";
+import FormPageSwitchLink from "./FormPageSwitchLink";
+import ErrorMessage from "./ErrorMessage";
 
 // UTILS
-import { useLinkClickedStore } from '../utils/linkClickedStore'
-import useLocalStorage from '../utils/useLocalStorage'
-import { login } from '../utils/login'
+import { useLinkClickedStore } from "../utils/linkClickedStore";
+import useLocalStorage from "../utils/useLocalStorage";
+import { login } from "../utils/login";
 
 const LoginSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Invalid email')
-      .required('Required'),
-    password: Yup.string()
-      .required('Required')
-  })
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().required("Required"),
+});
 
 export default function Login(props) {
-  const linkClicked = useLinkClickedStore((state) => state.linkClicked)
-  const setClickedTrue = useLinkClickedStore((state) => state.clickedTrue)
-  const setClickedFalse = useLinkClickedStore((state) => state.clickedFalse)
-  const [loginError, setLoginError] = useState(null)
-  const { setItemWithExpiry } = useLocalStorage("access-token")
+  const linkClicked = useLinkClickedStore((state) => state.linkClicked);
+  const setClickedTrue = useLinkClickedStore((state) => state.clickedTrue);
+  const setClickedFalse = useLinkClickedStore((state) => state.clickedFalse);
+  const [loginError, setLoginError] = useState(null);
+  const { setItemWithExpiry } = useLocalStorage("access-token");
 
   const handleLogin = async (values, setSubmitting) => {
-    console.log("testing link clicked", linkClicked)
-    setLoginError('')
-    const day = 86400000
+    setLoginError("");
+    const day = 86400000;
     try {
-      const loginRes = await login(values.email, values.password)
+      const loginRes = await login(values.email, values.password);
 
-      setItemWithExpiry(loginRes.accessToken, day)
+      loginRes.data.status === 200 &&
+        setItemWithExpiry(loginRes.accessToken, day) &&
+        setClickedFalse();
 
-      props.history.push("/dashboard")
+      props.history.push("/dashboard");
     } catch (error) {
-      error.response.status === 401 ? setLoginError("Incorrect username or password!") : setLoginError("Something went wrong... please try again")
+      error.response.status === 401
+        ? setLoginError("Incorrect username or password!")
+        : setLoginError("Something went wrong... please try again");
     }
-    setSubmitting(false)
-  }
+    setSubmitting(false);
+  };
 
   return (
     <div className="main-container">
       <FormPageBackround />
-      <FormPageHeader linkClicked={linkClicked} 
-        headerLineOne="Welcome" 
-        headerLineTwo="back" 
-        subheader="Log-in to see your scores" 
+      <FormPageHeader
+        linkClicked={linkClicked}
+        headerLineOne="Welcome"
+        headerLineTwo="back"
+        subheader="Log-in to see your scores"
       />
-      
-      <motion.div 
-        style={{position: 'relative', height: "100%"}}
+
+      <motion.div
+        style={{ position: "relative", height: "100%" }}
         initial={linkClicked ? { visibility: false } : { opacity: 0 }}
         animate={linkClicked ? { visibility: true } : { opacity: 1 }}
         exit={linkClicked ? { visibility: false } : { opacity: 0 }}
@@ -65,25 +66,29 @@ export default function Login(props) {
       >
         <Formik
           initialValues={{
-            email: '',
-            password: ''
+            email: "",
+            password: "",
           }}
           validationSchema={LoginSchema}
           onSubmit={(values, { setSubmitting }) => {
-            handleLogin(values, setSubmitting)
+            handleLogin(values, setSubmitting);
           }}
         >
-          {({ values, errors, touched, handleChange, isSubmitting, handleBlur }) => (
+          {({ values, errors, touched, handleChange, isSubmitting }) => (
             <Form className="logsignin-form">
               <div className="spacer"></div>
               <div className="form-group">
-              <ErrorMessage error={loginError} />
+                <ErrorMessage error={loginError} />
                 {errors.email && touched.email ? (
                   <ErrorMessage error={errors.email} />
                 ) : null}
-                <Field 
-                  name="email" 
-                  className={errors.email && touched.email ? "form-input form-input-error" : "form-input"}
+                <Field
+                  name="email"
+                  className={
+                    errors.email && touched.email
+                      ? "form-input form-input-error"
+                      : "form-input"
+                  }
                   type="text"
                   value={values.email}
                   placeholder="email"
@@ -91,11 +96,15 @@ export default function Login(props) {
                   error={touched.email && errors.email}
                 />
                 {errors.password && touched.password ? (
-                <ErrorMessage error={errors.password} />
+                  <ErrorMessage error={errors.password} />
                 ) : null}
-                <Field 
+                <Field
                   name="password"
-                  className={errors.password && touched.password ? "form-input form-input-error" : "form-input"}
+                  className={
+                    errors.password && touched.password
+                      ? "form-input form-input-error"
+                      : "form-input"
+                  }
                   type="password"
                   value={values.password}
                   placeholder="password"
@@ -104,13 +113,13 @@ export default function Login(props) {
                 />
                 <FormPageSwitchLink
                   className="form-switch"
-                  pText="Dont have an account? " 
+                  pText="Dont have an account? "
                   linkText="Sign-up!"
                   path="/signup"
                   handleClick={setClickedTrue}
                 />
               </div>
-              <FormPageAnimatedButton 
+              <FormPageAnimatedButton
                 btnText={isSubmitting ? "Loading..." : "login"}
                 disabled={isSubmitting || errors.email || errors.password}
               />
@@ -119,5 +128,5 @@ export default function Login(props) {
         </Formik>
       </motion.div>
     </div>
-  )
+  );
 }
