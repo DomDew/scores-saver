@@ -13,15 +13,6 @@ class Api::V1::BaseController < ApplicationController
     }, status: 400
   end
 
-  def user_exists
-    render json: {
-      'errors': [
-        'status': '401',
-        'title': 'User already exists'
-      ]
-    }
-  end
-
   def not_found
     render json: {
       'errors': [

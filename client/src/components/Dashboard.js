@@ -1,6 +1,9 @@
 import React from "react";
 import useLocalStorage from "../utils/useLocalStorage";
 
+// COMPONENTS
+import Navbar from "./Navbar";
+
 export default function Dashboard(props) {
   const { clearItem } = useLocalStorage("access-token");
 
@@ -11,9 +14,7 @@ export default function Dashboard(props) {
 
   return (
     <>
-      <p>This is a dashboard...</p>
-
-      <button onClick={logout}>logout</button>
+      <Navbar logout={logout} />
     </>
   );
 }
