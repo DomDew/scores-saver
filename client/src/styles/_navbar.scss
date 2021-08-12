@@ -11,6 +11,7 @@
   height: 10vh;
   width: 90vw;
   padding: 0 5vw;
+  z-index: 10;
   background-color: $main-grey;
 }
 
@@ -26,7 +27,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: absolute;
   width: 150px;
   padding: 0.5em;
   height: fit-content;
