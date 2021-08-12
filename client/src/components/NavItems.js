@@ -12,14 +12,14 @@ const animatorVariants = {
 
 const itemVariants = {
   open: {
-    x: 0,
+    y: 0,
     opacity: 1,
     transition: {
-      x: { stiffness: 1000 },
+      y: { stiffness: 1000 },
     },
   },
   closed: {
-    x: 50,
+    y: 50,
     opacity: 0,
     transition: {
       y: { stiffness: 1000 },

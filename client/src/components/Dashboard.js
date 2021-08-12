@@ -13,8 +13,8 @@ export default function Dashboard(props) {
   };
 
   return (
-    <>
+    <div className="app-container">
       <Navbar logout={logout} />
-    </>
+    </div>
   );
 }
