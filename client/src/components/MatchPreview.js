@@ -2,7 +2,6 @@ import React from "react";
 import { format } from "date-fns";
 
 export default function MatchPreview(props) {
-  console.log(typeof props.date);
   const date = format(new Date(props.date), "dd.MM.yy");
 
   return (
@@ -20,13 +19,18 @@ export default function MatchPreview(props) {
         </h3>
       </div>
       <div className="match-mid">
-        <p>{props.ownerFaction}</p>
+        <p style={{ width: "45%" }}>{props.ownerFaction}</p>
         <p>vs.</p>
-        <p>{props.opponentFaction}</p>
+        <p style={{ width: "45%", textAlign: "end" }}>
+          {" "}
+          {props.opponentFaction}
+        </p>
       </div>
       <div className="match-bottom">
         <p>You: {props.ownerScore}</p>
-        <p>Tobias: {props.opponentScore}</p>
+        <p>
+          {props.opponentName}: {props.opponentScore}
+        </p>
       </div>
     </>
   );

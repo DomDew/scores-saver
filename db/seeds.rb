@@ -11,7 +11,7 @@ User.destroy_all
 Api::V1::Match.destroy_all
 
 puts 'Creating our friend Juergen...'
-User.create!(email: 'juergen@dose.de', password: '123456!')
+User.create!(email: 'juergen@dose.de', password: 'testacc1!')
 juergen = User.last
 
 puts 'Creating matches for our friend Juergen...'
@@ -97,7 +97,7 @@ Api::V1::Match.create!(
       owner: false,
       attacker: false,
       first_turn: false,
-      faction: "T'AU",
+      faction: "T'au",
       primaries_score: 10,
       secondaries_score: 14,
       total_vp: 34

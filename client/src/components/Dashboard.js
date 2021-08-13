@@ -57,6 +57,7 @@ export default function Dashboard(props) {
               ownerFaction={match.attributes.player_scores[0].faction}
               opponentFaction={match.attributes.player_scores[1].faction}
               ownerScore={match.attributes.player_scores[0].total_vp}
+              opponentName={match.attributes.player_scores[1].name}
               opponentScore={match.attributes.player_scores[1].total_vp}
             />
           ))}

@@ -9,11 +9,27 @@ export default function SectionFolder(props) {
   const sectionVariants = {
     open: {
       opacity: 1,
-      transition: { staggerChildren: 0.3, staggerDirection: 1 },
+      transition: { staggerChildren: 0.3 },
     },
     closed: {
       opacity: 1,
-      transition: { staggerChildren: 0.1, staggerDirection: -1 },
+      transition: { staggerChildren: 0.3 },
+    },
+  };
+
+  const itemVariants = {
+    open: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.3 },
+    },
+    closed: {
+      opacity: 0,
+      y: -60,
+      transition: { duration: 0.3 },
+      transitionEnd: {
+        display: "none",
+      },
     },
   };
 
@@ -46,33 +62,17 @@ export default function SectionFolder(props) {
         variants={sectionVariants}
         animate={isOpen ? "open" : "closed"}
       >
-        <AnimatePresence exitBeforeEnter>
-          {props.children &&
-            isOpen &&
-            props.children.map((element, index) => (
-              <motion.div
-                key={index}
-                initial={{
-                  y: -60,
-                  opacity: 0,
-                  transition: { y: { stiffness: 1000 } },
-                }}
-                animate={{
-                  y: 0,
-                  opacity: 1,
-                  transition: { y: { stiffness: 1000 } },
-                }}
-                exit={{
-                  y: -60,
-                  opacity: 0,
-                  transition: { y: { stiffness: 1000 } },
-                }}
-                className="section-block"
-              >
-                {element}
-              </motion.div>
-            ))}
-        </AnimatePresence>
+        {props.children &&
+          props.children.map((element, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              animate={isOpen ? "open" : "closed"}
+              className="section-block"
+            >
+              {element}
+            </motion.div>
+          ))}
       </motion.div>
     </>
   );
