@@ -1,6 +1,6 @@
 import React from "react";
 import { faSortDown } from "@fortawesome/free-solid-svg-icons";
-import { AnimatePresence, motion, useCycle } from "framer-motion";
+import { motion, useCycle } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function SectionFolder(props) {
@@ -8,11 +8,9 @@ export default function SectionFolder(props) {
 
   const sectionVariants = {
     open: {
-      opacity: 1,
       transition: { staggerChildren: 0.3 },
     },
     closed: {
-      opacity: 1,
       transition: { staggerChildren: 0.3 },
     },
   };
@@ -22,6 +20,7 @@ export default function SectionFolder(props) {
       opacity: 1,
       y: 0,
       transition: { duration: 0.3 },
+      display: "block",
     },
     closed: {
       opacity: 0,

@@ -21,7 +21,6 @@ export default function Dashboard(props) {
       },
     });
     const data = await res;
-    console.log(data);
     return data;
   };
 
