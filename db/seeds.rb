@@ -54,7 +54,7 @@ Api::V1::Match.create!(
   player_scores_attributes: [
     {
       name: 'Juergen',
-      owner: false,
+      owner: true,
       attacker: true,
       first_turn: true,
       faction: 'Imperial Fists',
@@ -64,7 +64,7 @@ Api::V1::Match.create!(
     },
     {
       name: 'Sandra',
-      owner: true,
+      owner: false,
       attacker: false,
       first_turn: false,
       faction: 'Drukhari',
@@ -84,7 +84,7 @@ Api::V1::Match.create!(
   player_scores_attributes: [
     {
       name: 'Juergen',
-      owner: false,
+      owner: true,
       attacker: true,
       first_turn: true,
       faction: 'Death Guard',
@@ -94,7 +94,7 @@ Api::V1::Match.create!(
     },
     {
       name: 'Harald',
-      owner: true,
+      owner: false,
       attacker: false,
       first_turn: false,
       faction: "T'AU",

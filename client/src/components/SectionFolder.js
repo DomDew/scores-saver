@@ -1,10 +1,10 @@
 import React from "react";
 import { faSortDown } from "@fortawesome/free-solid-svg-icons";
-import { motion, useCycle } from "framer-motion";
+import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function SectionFolder(props) {
-  const [isOpen, toggleOpen] = useCycle(true, false);
+  const [isOpen, toggleOpen] = useCycle(props.cycleValue1, props.cycleValue2);
 
   const sectionVariants = {
     open: {
@@ -12,23 +12,6 @@ export default function SectionFolder(props) {
     },
     closed: {
       transition: { staggerChildren: 0.1, staggerDirection: -1 },
-    },
-  };
-
-  const itemVariants = {
-    open: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        y: { stiffness: 1000 },
-      },
-    },
-    closed: {
-      y: 50,
-      opacity: 0,
-      transition: {
-        y: { stiffness: 1000 },
-      },
     },
   };
 
@@ -52,21 +35,39 @@ export default function SectionFolder(props) {
           <FontAwesomeIcon icon={faSortDown} />
         </motion.p>
       </div>
+
       <motion.div
         className="section-wrapper"
         variants={sectionVariants}
         animate={isOpen ? "open" : "closed"}
       >
-        {props.children.map((element, index) => (
-          <motion.div
-            key={index}
-            variants={itemVariants}
-            animate={isOpen ? "open" : "closed"}
-            className="section-block"
-          >
-            {element}
-          </motion.div>
-        ))}
+        <AnimatePresence exitBeforeEnter>
+          {props.children &&
+            isOpen &&
+            props.children.map((element, index) => (
+              <motion.div
+                key={index}
+                initial={{
+                  y: -60,
+                  opacity: 0,
+                  transition: { y: { stiffness: 1000 } },
+                }}
+                animate={{
+                  y: 0,
+                  opacity: 1,
+                  transition: { y: { stiffness: 1000 } },
+                }}
+                exit={{
+                  y: -60,
+                  opacity: 0,
+                  transition: { y: { stiffness: 1000 } },
+                }}
+                className="section-block"
+              >
+                {element}
+              </motion.div>
+            ))}
+        </AnimatePresence>
       </motion.div>
     </>
   );

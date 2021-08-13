@@ -1,20 +1,32 @@
 import React from "react";
+import { format } from "date-fns";
 
 export default function MatchPreview(props) {
+  console.log(typeof props.date);
+  const date = format(new Date(props.date), "dd.MM.yy");
+
   return (
     <>
       <div className="match-top">
-        <p>24.07.21</p>
-        <h3 className="match-result match-win">Win</h3>
+        <p>{date}</p>
+        <h3
+          className={
+            props.matchResult === "win"
+              ? "match-result match-win"
+              : "match-result match-loss"
+          }
+        >
+          {props.matchResult}
+        </h3>
       </div>
       <div className="match-mid">
-        <p>Death Guard</p>
+        <p>{props.ownerFaction}</p>
         <p>vs.</p>
-        <p>Imperial Fists</p>
+        <p>{props.opponentFaction}</p>
       </div>
       <div className="match-bottom">
-        <p>You: 68</p>
-        <p>Tobias: 34</p>
+        <p>You: {props.ownerScore}</p>
+        <p>Tobias: {props.opponentScore}</p>
       </div>
     </>
   );
