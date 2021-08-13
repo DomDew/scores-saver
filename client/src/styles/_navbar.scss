@@ -1,0 +1,71 @@
+@use '_colors' as *;
+
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  width: 90vw;
+  padding: 0 5vw;
+  z-index: 10;
+  background-color: $main-grey;
+}
+
+.hamburger {
+  display: flex;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.sub-menu-container {
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  padding: 0.5em;
+  height: fit-content;
+  right: 2px;
+  background-color: #2B2F3B;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px 2px rgb(20 20 20 / 25%);
+}
+
+.sub-menu-animator {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sub-menu-item {
+  width: 100%;
+  border-bottom: 1px solid $main-grey;
+  padding: 5px 0px;
+  border-radius: 5px;
+  transition: background-color 0.4s;
+  text-transform: uppercase;
+  cursor: pointer;
+  &:hover {
+    background-color: $main-grey;
+  }
+  &:active {
+    background-color: $main-grey;
+  }
+  &.btn-sub-menu {
+    background-color: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    &:hover {
+      background-color: $main-grey;
+    }
+  }
+  &:last-of-type {
+    border: none;
+  }
+}

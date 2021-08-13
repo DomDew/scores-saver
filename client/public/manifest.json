@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Scores Saver",
+  "name": "Scores Saver - Track your Tabletop Scores!",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#2B2F3B",

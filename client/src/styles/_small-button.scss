@@ -1,0 +1,17 @@
+@use '_colors' as *;
+
+.btn-small {
+  border: none;
+  background: linear-gradient(to right, $main-green,$main-darker-green);
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Karla', sans-serif;
+  border-radius: 5px;
+  color: white;
+  width: 120px;
+  height: 32px;
+  &:disabled {
+    opacity: 0.7;
+  }
+}

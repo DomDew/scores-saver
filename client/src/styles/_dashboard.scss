@@ -1,0 +1,44 @@
+@use "_colors" as *;
+
+.section-folder-container {
+  width: 85vw;
+  height: 10vh;
+  padding: 0 7.5vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $main-dark-grey;
+  transition: background-color 0.2s;
+  z-index: 2;
+  cursor: pointer;
+  &.section-active {
+    background-color: $main-green;
+  }
+}
+
+.section-wrapper {
+  width: 85vw;
+  padding: 0 7.5vw;
+}
+
+.section-block {
+  width: 100%;
+  border-bottom: 1px solid $main-grey;
+  padding: 5vw 0;
+  font-weight: 300;
+}
+
+.match-top, .match-mid, .match-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.match-result {
+  text-transform: uppercase;
+  &.match-win {
+    color: $main-green;
+  }
+  &.match-loss {
+    color: $error-red;
+  }
+}

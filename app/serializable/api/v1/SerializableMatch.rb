@@ -10,10 +10,12 @@ class Api::V1::SerializableMatch < JSONAPI::Serializable::Resource
   attributes :title, :battle_size, :mission, :result
 
   attribute :date do
-    @object.created_at
+    @object.created_at.to_datetime.strftime('%Q').to_i
   end
 
-  has_many :player_scores
+  attribute :player_scores do
+    @object.player_scores
+  end
 
   belongs_to :user
 

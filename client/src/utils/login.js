@@ -1,16 +1,16 @@
 export const login = async (email, password) => {
-  const axios = require('axios')
+  const axios = require("axios");
 
-  const userDetails = { email: email, password: password }
+  const userDetails = { email: email, password: password };
 
-  const url = "http://localhost:3001/api/v1/login"
+  const url = "http://localhost:3001/api/v1/login";
   const res = await axios.post(url, {
     headers: { "Content-Type": "application/json" },
-    user: userDetails
+    user: userDetails,
   });
 
-  const accessToken = await res.headers.authorization
-  const data = await res
+  const accessToken = await res.headers.authorization;
+  const data = await res;
 
-  return { data, accessToken }
-}
+  return { data, accessToken };
+};
