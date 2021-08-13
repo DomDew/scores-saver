@@ -8,16 +8,21 @@ export default function SectionFolder(props) {
 
   const sectionVariants = {
     open: {
+      opacity: 1,
       transition: { staggerChildren: 0.3, staggerDirection: 1 },
     },
     closed: {
+      opacity: 1,
       transition: { staggerChildren: 0.1, staggerDirection: -1 },
     },
   };
 
   return (
     <>
-      <div
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.7 }}
         className={
           isOpen
             ? "section-folder-container section-active"
@@ -34,7 +39,7 @@ export default function SectionFolder(props) {
         >
           <FontAwesomeIcon icon={faSortDown} />
         </motion.p>
-      </div>
+      </motion.div>
 
       <motion.div
         className="section-wrapper"
