@@ -1,4 +1,4 @@
-Ruby 2.6+
+Ruby 2.7+
 Install Rails
 
 bundle install
